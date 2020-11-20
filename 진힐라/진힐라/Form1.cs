@@ -13,7 +13,7 @@ namespace 진힐라
     public partial class Form1 : Form
     {
         //시작 시간
-        static int count = 1634;
+        static int count = 1632;
 
         //첫 패턴 주기 시간
         static int pattern = 150;
@@ -28,7 +28,7 @@ namespace 진힐라
 
         //패턴까지 남은 시간 초기변수
         int time_left = count - first_pattern;
-        
+
         //시간으로 변환하는 함수
         DateTime datetime;
 
@@ -55,16 +55,13 @@ namespace 진힐라
             label6.Visible = true;
             label2.Text = datetime.AddSeconds(first_pattern).ToString("mm:ss");
             label6.Text = datetime.AddSeconds(pattern).ToString("mm분:ss초");
-            
+
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = datetime.AddSeconds(count).ToString("mm:ss");
 
             //패턴 시간 도달했을 시1
-            if (count == compareInt+1) {
-                after_pattern = compareInt;
-            }
             label6.Text = datetime.AddSeconds(time_left).ToString("mm분:ss초");
             count--;
         }
@@ -72,7 +69,7 @@ namespace 진힐라
         //시간이 지났을때
         public void patternChange()
         {
-            
+
             int temp = count;
             temp -= patternCount();
             label2.Text = datetime.AddSeconds(temp).ToString("mm:ss");
@@ -84,8 +81,8 @@ namespace 진힐라
 
         public void changePattern()
         {
-            if(!check)
-            {   
+            if (check)
+            {
                 compareInt += patternCount();
             }
             checkCount++;
@@ -97,17 +94,12 @@ namespace 진힐라
             timer2.Start();
         }
 
-        public void showTime()
-        {
-            label2.Text = datetime.AddSeconds(after_pattern - patternCount()).ToString("mm:ss");
-        }
-
         public int patternCount()
         {
             switch (checkCount)
             {
                 case 1:
-                    pattern = 125; 
+                    pattern = 125;
                     return pattern;
                 case 2:
                     pattern = 100;
@@ -121,7 +113,7 @@ namespace 진힐라
         private void timer2_Tick(object sender, EventArgs e)
         {
             //MessageBox.Show(temp.ToString());
-            if(time_left <= 30)
+            if (time_left <= 30)
             {
                 label6.ForeColor = Color.Red;
             }
@@ -129,22 +121,22 @@ namespace 진힐라
             {
                 label6.ForeColor = Color.Black;
             }
-            
-            if (time_left <= 1)
+
+            if (time_left < 1)
             {
                 //patternChange();
                 time_left = patternCount();
             }
             time_left--;
-            
+
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-                
+
                 case Keys.F5:
-                    {   
+                    {
                         patternChange();
                         break;
                     }
@@ -154,11 +146,6 @@ namespace 진힐라
                         break;
                     }
             }
-        }
-        public void nextPattern()
-        {
-            check = true;
-            patternChange();
         }
     }
 }
