@@ -85,14 +85,10 @@ namespace 진힐라
         public void changePattern()
         {
             if(!check)
-            {
-                checkCount++;
-                
-            }
-            else
-            {
+            {   
                 compareInt += patternCount();
             }
+            checkCount++;
             int temp = compareInt;
             temp -= patternCount();
             label2.Text = datetime.AddSeconds(temp).ToString("mm:ss");
