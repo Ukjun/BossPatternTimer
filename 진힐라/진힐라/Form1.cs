@@ -63,6 +63,12 @@ namespace 진힐라
 
             //패턴 시간 도달했을 시1
             label6.Text = datetime.AddSeconds(time_left).ToString("mm분:ss초");
+            if (count == 0)
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("Timer Timeout");
+            }
             count--;
         }
 
@@ -98,14 +104,14 @@ namespace 진힐라
         {
             switch (checkCount)
             {
+                case 0:
+                    pattern = 150;
+                    return pattern;
                 case 1:
                     pattern = 125;
                     return pattern;
-                case 2:
-                    pattern = 100;
-                    return pattern;
                 default:
-                    pattern = 150;
+                    pattern = 100;
                     return pattern;
             }
         }
