@@ -38,6 +38,7 @@
             this.bossTimeLeft = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -123,11 +124,22 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "패턴까지 남은 시간";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Sandoll 미생", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(6, 178);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 21);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "label3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 208);
+            this.ClientSize = new System.Drawing.Size(306, 226);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.bossTimeLeft);
@@ -156,6 +168,7 @@
         private System.Windows.Forms.Label bossTimeLeft;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
     }
 }
 

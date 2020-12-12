@@ -28,7 +28,7 @@ namespace 진힐라
 
         //패턴까지 남은 시간 초기변수
         int time_left = count - first_pattern;
-
+        
         //시간으로 변환하는 함수
         DateTime datetime;
 
@@ -43,7 +43,9 @@ namespace 진힐라
             InitializeComponent();
             datetime = new DateTime();
             label1.Text = datetime.AddSeconds(count).ToString("mm:ss");
+            label2.Text = datetime.AddSeconds(first_pattern).ToString("mm:ss");
             //비교할 변수 처음 패턴 시간으로 지정
+            label3.Text = "Made by 신혜\nHeader: 아릿찡";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,29 +55,21 @@ namespace 진힐라
             button1.Visible = false;
             label2.Visible = true;
             label6.Visible = true;
-            label2.Text = datetime.AddSeconds(first_pattern).ToString("mm:ss");
+            //label2.Text = datetime.AddSeconds(first_pattern).ToString("mm:ss");
             label6.Text = datetime.AddSeconds(pattern).ToString("mm분:ss초");
-
+            
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = datetime.AddSeconds(count).ToString("mm:ss");
-
-            //패턴 시간 도달했을 시1
-            label6.Text = datetime.AddSeconds(time_left).ToString("mm분:ss초");
-            if (count == 0)
-            {
-                timer1.Stop();
-                timer2.Stop();
-                MessageBox.Show("Timer Timeout");
-            }
-            count--;
+            ShowTime();
+            TimeCount();
         }
 
         //시간이 지났을때
         public void patternChange()
         {
-
+            
             int temp = count;
             temp -= patternCount();
             label2.Text = datetime.AddSeconds(temp).ToString("mm:ss");
@@ -85,9 +79,39 @@ namespace 진힐라
             timer2.Start();
         }
 
+        private void ShowTime()
+        {
+            label1.Text = datetime.AddSeconds(count).ToString("mm:ss");
+            label2.Text = datetime.AddSeconds(compareInt).ToString("mm:ss");
+            //패턴 시간 도달했을 시1
+            label6.Text = datetime.AddSeconds(time_left).ToString("mm분:ss초");
+        }
+
+        public void TimeCount()
+        {
+            count--;
+            label6.Text = datetime.AddSeconds(time_left).ToString("mm분:ss초");
+            if (count == 0)
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("Timer Timeout");
+            }else if(count<=compareInt){
+                label2.Text = datetime.AddSeconds(compareInt-patternCount()).ToString("mm:ss");
+                if (compareInt - patternCount() < 0)
+                {
+                    label2.Text = datetime.AddSeconds(0).ToString("mm:ss");
+                }
+                else
+                {
+                    compareInt = compareInt - patternCount();
+                }
+            }
+        }
+
         public void changePattern()
         {
-            if (check)
+            if(check)
             {
                 compareInt += patternCount();
             }
@@ -99,13 +123,13 @@ namespace 진힐라
             check = false;
             timer2.Start();
         }
-
+        
         public int patternCount()
         {
             switch (checkCount)
             {
                 case 0:
-                    pattern = 150;
+                    pattern = 150; 
                     return pattern;
                 case 1:
                     pattern = 125;
@@ -119,7 +143,7 @@ namespace 진힐라
         private void timer2_Tick(object sender, EventArgs e)
         {
             //MessageBox.Show(temp.ToString());
-            if (time_left <= 30)
+            if(time_left <= 30)
             {
                 label6.ForeColor = Color.Red;
             }
@@ -127,22 +151,22 @@ namespace 진힐라
             {
                 label6.ForeColor = Color.Black;
             }
-
-            if (time_left < 1)
+            
+            if (time_left <1)
             {
                 //patternChange();
                 time_left = patternCount();
             }
             time_left--;
-
+            
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-
+                
                 case Keys.F5:
-                    {
+                    {   
                         patternChange();
                         break;
                     }
@@ -153,5 +177,6 @@ namespace 진힐라
                     }
             }
         }
+
     }
 }
